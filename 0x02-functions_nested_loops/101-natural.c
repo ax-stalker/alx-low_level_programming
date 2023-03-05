@@ -1,35 +1,18 @@
 #include <stdio.h>
-#include "main.h"
+/**
+  * main - computes and prints the sum of all the multiples of
+  * 3 or 5 below.
+  * Return: Nothing.
+  */
 
-/*
-	 * File: 101-natural.c
-	 * Auth: vincent kip
-	 */
+int main(void)
+{
+	int i, result;
+	int endPoint = 1024;
 
-
-	#include <stdio.h>
-
-
-	/**
-	 * main - Lists all the natural numbers below 1024 (excluded)
-	 *        that are multiples of 3 or 5.
-	 *
-	 * Return: Always 0.
-	 */
-	int main(void)
-	{
-		int i, sum = 0;
-
-
-		for (i = 0; i < 1024; i++)
-		{
-			if ((i % 3) == 0 || (i % 5) == 0)
-				sum += i;
-		}
-
-
-		printf("%d\n", sum);
-
-
-		return (0);
-	}
+	for (i = 0; i < endPoint; i++)
+		if (i % 3 == 0 || i % 5 == 0)
+			result += i;
+	printf("%d\n", result);
+	return (0);
+}
