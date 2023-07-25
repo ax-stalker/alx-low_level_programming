@@ -12,20 +12,22 @@
 
 unsigned int binary_to_uint(const char *b)
 {
-	if(b == NULL)
-		return 0;
+    if (b == NULL)
+        return 0;
 
-	int string_length = strlen(b);
-	unsigned int response = 0;
+    unsigned int response = 0;
+    int string_length = strlen(b);
+    int i;
 
-	for (int i= 0; i< string_length; i++){
-		char character =b[i];
-		if (character != '0' && character != '1')
-			return 0;
+    for (i = 0; i < string_length; i++) {
+        char character = b[i];
+        if (character != '0' && character != '1')
+            return 0;
 
-		response <<= 1;
-		response += character -'0';
-	}
-	return response;
+        response <<= 1;
+        response += character - '0';
+    }
+
+    return response;
 }
 	
