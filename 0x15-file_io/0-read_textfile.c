@@ -1,7 +1,5 @@
 #include "main.h"
 #include <stdlib.h>
-#include <fcntl.h> // Include for the open function
-#include <unistd.h> // Include for the read, write, and close functions
 
 /**
  * read_textfile- Read text file print to STDOUT.
@@ -12,42 +10,19 @@
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-    char *buf;
-    int fd; // Change ssize_t to int for file descriptor
-    ssize_t t;
-    ssize_t w;
+	char *buf;
+	ssize_t fd;
+	ssize_t w;
+	ssize_t t;
 
-    if (filename == NULL)
-        return (0);
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		return (0);
+	buf = malloc(sizeof(char) * letters);
+	t = read(fd, buf, letters);
+	w = write(STDOUT_FILENO, buf, t);
 
-    fd = open(filename, O_RDONLY);
-    if (fd == -1)
-        return (0);
-
-    buf = malloc(sizeof(char) * letters);
-    if (buf == NULL) // Check if memory allocation failed
-    {
-        close(fd); // Close the file descriptor before returning
-        return (0);
-    }
-
-    t = read(fd, buf, letters);
-    if (t == -1)
-    {
-        free(buf); // Free allocated memory before returning
-        close(fd);
-        return (0);
-    }
-
-    w = write(STDOUT_FILENO, buf, t);
-    if (w == -1)
-    {
-        free(buf);
-        close(fd);
-        return (0);
-    }
-
-    free(buf);
-    close(fd);
-    return (w);
+	free(buf);
+	close(fd);
+	return (w);
 }
